@@ -1,0 +1,13 @@
+{
+    "name": "jahid/post-view-count",
+    "description": "This is a wordpress plugin which will display post view count in single post",
+    "type": "project",
+    "license": "GPL",
+    "autoload": {
+        "psr-4": {
+            "PostViewCount\\Includes\\": "includes"
+        }
+    },
+    "minimum-stability": "stable",
+    "require": {}
+}
