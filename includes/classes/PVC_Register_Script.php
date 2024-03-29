@@ -1,5 +1,5 @@
 <?php
-namespace PostViewCount\Includes;
+namespace PostViewCount\Includes\Classes;
 
 if ( ! defined( "ABSPATH" ) ) exit;
 
@@ -36,8 +36,15 @@ class PVC_Register_Script{
      * @since 1.0.0
      */
     public function register_admin_script(){
-        wp_enqueue_style( 'pvc-admin-style', PVC_PLUGIN_URL . 'assets/admin/css/style.css', array(), PVC_VERSION, 'all' );
 
-        wp_enqueue_script( 'pvc-admin-script', PVC_PLUGIN_URL . 'assets/admin/js/script.js', array( 'jquery' ), PVC_VERSION, true );
+        // Check if current screen is post-view-count settings page
+        $screen = get_current_screen();
+
+        if( 'toplevel_page_post-view-count' === $screen->id ){
+            wp_enqueue_style( 'pvc-admin-style', PVC_PLUGIN_URL . 'assets/admin/css/style.css', array(), PVC_VERSION, 'all' );
+
+            wp_enqueue_script( 'pvc-admin-script', PVC_PLUGIN_URL . 'assets/admin/js/script.js', array( 'jquery' ), PVC_VERSION, true );
+        }
+        
     }
 }

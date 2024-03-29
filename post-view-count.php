@@ -12,6 +12,7 @@ Description: This will show post view count in single post or via shortcode and 
 License:     GPL2
 */
 
+
 // PVC Plugin namespace
 namespace PostViewCount;
 
@@ -30,8 +31,9 @@ require_once 'vendor/autoload.php';
 define( 'PVC_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
 define( 'PVC_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 define( 'PVC_VERSION', '1.0' );
-define( 'PVC_PLUGIN_NAME', 'post-view-count'  );
+define( 'PVC_PLUGIN_NAME', 'post-view-count' );
 
 
 // Instantiate PVC_ManiClass class
-new Includes\Post_View_Count();
+use PostViewCount\Includes\Classes\Post_View_Count;
+new Post_View_Count();

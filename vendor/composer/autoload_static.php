@@ -9,14 +9,14 @@ class ComposerStaticInit63bd1f5e9c16d2d5789c77d4e351fe0c
     public static $prefixLengthsPsr4 = array (
         'P' => 
         array (
-            'PostViewCount\\Includes\\' => 23,
+            'PostViewCount\\Includes\\Classes\\' => 31,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'PostViewCount\\Includes\\' => 
+        'PostViewCount\\Includes\\Classes\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/includes',
+            0 => __DIR__ . '/../..' . '/includes/classes',
         ),
     );
 

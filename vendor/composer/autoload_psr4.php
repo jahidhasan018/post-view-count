@@ -6,5 +6,5 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
-    'PostViewCount\\Includes\\' => array($baseDir . '/includes'),
+    'PostViewCount\\Includes\\Classes\\' => array($baseDir . '/includes/classes'),
 );

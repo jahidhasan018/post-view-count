@@ -1,5 +1,5 @@
 <?php
-namespace PostViewCount\Includes;
+namespace PostViewCount\Includes\Classes;
 
 // Exit if access directly
 if( ! defined( 'ABSPATH' ) ) exit;
@@ -43,6 +43,9 @@ class Post_View_Count{
         // Plugin Loaded Hook
         add_action( 'plugins_loaded', [ $this, 'plugin_loaded' ] );
 
+        // Init Hook
+        add_action( 'init', [ $this, 'init' ] );
+
         // Instantiate Register_Script class
         new PVC_Register_Script();
 
@@ -52,8 +55,9 @@ class Post_View_Count{
         // Instantiate PVC_Shortcodes class
         new PVC_Shortcodes();
 
-        // Instantiate Pvc_Admin_Column class
-        new Pvc_Admin_Column();
+        // Load Required Files
+        $this->load_files();
+        
     }
 
     /**
@@ -69,6 +73,37 @@ class Post_View_Count{
 
         // Instantiate PVC_Admin_Page class
         new PVC_Admin_Page();
+        
+        // Instantiate PVC_Admin_Column class
+        new PVC_Admin_Column();
     }
+
+    /**
+     * Init Method
+     * 
+     * Callback method for 'init' action hook
+     * 
+     * @since 1.0.0
+     */
+    public function init(){
+        // Instantiate PVC_Display_Post_Count class
+        new PVC_Display_Post_Count();
+
+        // Register PVC Block
+        register_block_type( PVC_PLUGIN_PATH . 'blocks/build/single-post-view' );
+    }
+
+    /**
+     * Load Files Method
+     * 
+     * This method will load/include all the required files
+     * 
+     * @since 1.0.0
+     */
+    public function load_files(){
+        require_once PVC_PLUGIN_PATH . 'includes/pvc-functions.php';
+    }
+
+    //
 
 }
