@@ -40,22 +40,22 @@ class Post_View_Count{
         $this->version = PVC_VERSION;
         $this->plugin_name = PVC_PLUGIN_NAME;
 
-        // Plugin Loaded Hook
+        // Run after the plugins are loaded
         add_action( 'plugins_loaded', [ $this, 'plugin_loaded' ] );
 
-        // Init Hook
+        // Run after WordPress has finished 
         add_action( 'init', [ $this, 'init' ] );
 
-        // Instantiate Register_Script class
+        // Instantiate Register_Script class - This will register all the scripts and styles
         new PVC_Register_Script();
 
-        // Instantiate PVC_Save_Post_Views class
+        // Instantiate PVC_Save_Post_Views class - This will save post views in post meta
         new PVC_Save_Post_Views();
 
-        // Instantiate PVC_Shortcodes class
+        // Instantiate PVC_Shortcodes class - This will handle all the shortcodes
         new PVC_Shortcodes();
 
-        // Load Required Files
+        // Load Required Files - This will load/include all the required files
         $this->load_files();
         
     }
@@ -71,10 +71,10 @@ class Post_View_Count{
         // Load plugin text domain
         load_plugin_textdomain( 'post-view', false, PVC_PLUGIN_PATH . 'languages' );
 
-        // Instantiate PVC_Admin_Page class
+        // Instantiate PVC_Admin_Page class - This will handle all the admin pages
         new PVC_Admin_Page();
         
-        // Instantiate PVC_Admin_Column class
+        // Instantiate PVC_Admin_Column class - This will handle all the admin columns
         new PVC_Admin_Column();
     }
 
@@ -86,10 +86,10 @@ class Post_View_Count{
      * @since 1.0.0
      */
     public function init(){
-        // Instantiate PVC_Display_Post_Count class
+        // Instantiate PVC_Display_Post_Count class - This will display post views in single post
         new PVC_Display_Post_Count();
 
-        // Register PVC Block
+        // Register PVC Block - This will register the block
         register_block_type( PVC_PLUGIN_PATH . 'blocks/build/single-post-view' );
     }
 
@@ -102,8 +102,6 @@ class Post_View_Count{
      */
     public function load_files(){
         require_once PVC_PLUGIN_PATH . 'includes/pvc-functions.php';
+        require_once PVC_PLUGIN_PATH . 'lib/class.settings-api.php';
     }
-
-    //
-
 }

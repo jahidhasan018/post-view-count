@@ -10,17 +10,14 @@
  * @return mixed
  */
 function pvc_get_option( $option, $section, $default = '' ) {
-
     $options = get_option( $section );
-
     if ( isset( $options[$option] ) ) {
         return $options[$option];
     }
-
     return $default;
 }
 
-// Register rest field to get post views meta data
+// Register wprest field to get post views meta data via rest api - for block
 register_rest_field( 'post', 'views', array(
 'get_callback' => function ( $data ) {
     return get_post_meta( $data['id'], 'pvc_post_views', true );

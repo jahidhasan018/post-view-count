@@ -5,13 +5,12 @@ namespace PostViewCount\Includes\Classes;
 /**
  * PVC_Display_Post_Count class
  * 
- * This is the class that will display the post view count in the single post
- * 
  * @since 1.0.0
  */
 class PVC_Display_Post_Count {
 
     public function __construct() {
+        // Add filter to display post count
         add_filter( 'the_content', array( $this, 'display_post_count' ));
     }
 

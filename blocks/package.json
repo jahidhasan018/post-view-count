@@ -1,8 +1,8 @@
 {
-	"name": "blocks",
-	"version": "0.1.0",
-	"description": "Example block scaffolded with Create Block tool.",
-	"author": "The WordPress Contributors",
+	"name": "post-view-count",
+	"version": "1.0.0",
+	"description": "This block will show the post view count by given id.",
+	"author": "Jahid Hossain",
 	"license": "GPL-2.0-or-later",
 	"main": "build/index.js",
 	"scripts": {

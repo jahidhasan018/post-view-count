@@ -8,16 +8,12 @@ if( ! defined( 'ABSPATH' ) ) exit;
 /**
  * PVC_Save_Post_Views Class
  * 
- * This class will save post views in singe post meta 
- * 
  * @since 1.0.0
  */
 class PVC_Save_Post_Views{
     
-    /**
-     * PVC_Save_Post_Views constructor
-     */
     public function __construct(){
+        // Save Post Views in single post meta when the post is viewed
         add_action( 'wp_head', array( $this, 'pvc_save_post_views' ) );
     }
 

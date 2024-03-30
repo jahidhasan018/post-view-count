@@ -1,30 +1,33 @@
 <?php
 
 namespace PostViewCount\Includes\Classes;
+
+// Use The Settings API Wrapper class for admin
 use WeDevs_Settings_API;
 
 /**
  * PVC_Admin_Page class
  * 
- * This is the class that will handle the admin page
- * 
- * @author Tareq Hasan
  * @since 1.0.0
  */
 
 class PVC_Admin_Page {
     
+    /**
+     * The instance of the class
+     *
+     * @var object
+     */
     private $settings_api;
-
+    
     function __construct() {
-        $this->settings_api = new WeDevs_Settings_API;
+        $this->settings_api = new WeDevs_Settings_API();
 
         add_action( 'admin_init', array($this, 'admin_init') );
         add_action( 'admin_menu', array($this, 'admin_menu') );
     }
 
     function admin_init() {
-
         //set the settings
         $this->settings_api->set_sections( $this->get_settings_sections() );
         $this->settings_api->set_fields( $this->get_settings_fields() );
@@ -33,11 +36,20 @@ class PVC_Admin_Page {
         $this->settings_api->admin_init();
     }
 
+    /**
+     * Add menu in admin menu
+     *
+     * @since 1.0.0
+     */
     function admin_menu() {
-        //add_options_page( 'Settings API', 'Settings API', 'delete_posts', 'settings_api_test', array($this, 'plugin_page') );
         add_menu_page( __( 'Post View Count', 'post-view' ), __( 'Post View Count', 'post-view' ), 'manage_options', 'post-view-count', array($this, 'plugin_page'), 'dashicons-chart-line', 30 );
     }
 
+    /**
+     * Returns all the settings sections
+     *
+     * @return array settings sections
+     */
     function get_settings_sections() {
         $sections = array(
             array(
@@ -96,13 +108,23 @@ class PVC_Admin_Page {
                     'type'    => 'text',
                     'default' => __( 'Post Views', 'post-view' )
                 ),
-                // sub title
                 array(
                     'name'    => 'pvc_views_box_subtitle',
                     'label'   => __( 'Views Box Subtitle', 'post-view' ),
                     'desc'    => __( 'Subtitle for the views box in the single post', 'post-view' ),
                     'type'    => 'text',
                     'default' => __( 'Total views', 'post-view' )
+                ),
+                array(
+                    'name'    => 'pvc_remove_options',
+                    'label'   => __( 'Remove Plugin Options', 'post-view' ),
+                    'desc'    => __( 'Do you want to remove plugin options on uninstall?', 'post-view' ),
+                    'type'    => 'select',
+                    'default' => 'no',
+                    'options' => array(
+                        'yes' => 'Yes',
+                        'no'  => 'No'
+                    )
                 )
             )
         );
@@ -123,23 +145,4 @@ class PVC_Admin_Page {
 
         echo '</div>';
     }
-
-    /**
-     * Get all the pages
-     *
-     * @return array page names with key value pairs
-     * @since 1.0.0
-     */
-    function get_pages() {
-        $pages = get_pages();
-        $pages_options = array();
-        if ( $pages ) {
-            foreach ($pages as $page) {
-                $pages_options[$page->ID] = $page->post_title;
-            }
-        }
-
-        return $pages_options;
-    }
-
 }

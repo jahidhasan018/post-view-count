@@ -18,13 +18,13 @@ class PVC_Admin_Column{
     public function __construct(){
         $pvc_admin_column = pvc_get_option( 'pvc_admin_column', 'pvc_settings', 'yes' );
 
+        // Check if the admin column is enabled from settings
         if( 'yes' === $pvc_admin_column ){
             add_filter( 'manage_posts_columns', array( $this, 'add_views_column' ) );
             add_action( 'manage_posts_custom_column', array( $this, 'display_views' ), 10, 2 );
             add_filter( 'manage_edit-post_sortable_columns', array( $this, 'sortable_views_column' ) );
             add_action( 'pre_get_posts', array( $this, 'sort_views_column' ) );
-        }
-        
+        }        
     }
 
     /**
@@ -54,6 +54,7 @@ class PVC_Admin_Column{
     /**
      * Make views column Sortable based on views count
      * 
+     * @param array $columns
      */
     public function sortable_views_column( $columns ){
         $columns['post_views'] = 'post_views';

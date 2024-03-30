@@ -7,17 +7,11 @@ if( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * PVC_Shortcodes Class
- * 
- * This class will register shortcode for post view count plugin
  *   
  * @since 1.0.0
  */
-
 class PVC_Shortcodes{
 
-    /**
-     * PVC_Shortcodes constructor
-     */
     public function __construct(){
         // Single post view count shortcode
         add_shortcode( 'post_view_count', [ $this, 'pvc_single_post_view_count_shortcode' ] );
@@ -52,7 +46,7 @@ class PVC_Shortcodes{
         // Format the views
         $views = number_format_i18n( $views );
 
-        // Return post view count
+        // Return post view count HTML
         ob_start();
         ?>
 
@@ -61,15 +55,18 @@ class PVC_Shortcodes{
                     <?php if( '' !== $title ): ?>
                         <h4><?php echo esc_html( $title ); ?></h4>
                     <?php endif; ?>
-
                     <span><?php echo esc_html( $subtitle ); ?></span>
-                    <p><?php echo esc_html( $views ); ?></p>
+
+                    <?php if( ! is_page( $post_id ) ) :  ?>
+                        <p><?php echo esc_html( $views ); ?></p>
+                    <?php else : ?>
+                        <p><?php esc_html_e( 'Insert a post id.' ); ?></p>
+                    <?php endif; ?>
                 </div>
             </div>
 
         <?php
         return ob_get_clean();
-
     }
 
     /**

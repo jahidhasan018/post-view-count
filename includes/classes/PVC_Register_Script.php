@@ -25,9 +25,14 @@ class PVC_Register_Script{
      * @since 1.0.0
      */
     public function register_public_script(){
-        wp_enqueue_style( 'pvc-public-style', PVC_PLUGIN_URL . 'assets/public/css/style.css', array(), PVC_VERSION, 'all' );
+        // Check if post view count is enabled
+        $pvc_settings = pvc_get_option( 'pvc_show_count', 'pvc_settings', 'yes' );
 
-        wp_enqueue_script( 'pvc-public-script', PVC_PLUGIN_URL . 'assets/public/js/script.js', array( 'jquery' ), PVC_VERSION, true );
+        if( is_singular() && 'yes' === $pvc_settings ){
+            wp_enqueue_style( 'pvc-public-style', PVC_PLUGIN_URL . 'assets/public/css/style.css', array(), PVC_VERSION, 'all' );
+
+            wp_enqueue_script( 'pvc-public-script', PVC_PLUGIN_URL . 'assets/public/js/script.js', array( 'jquery' ), PVC_VERSION, true );
+        }
     }
 
     /**
